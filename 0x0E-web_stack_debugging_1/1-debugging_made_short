@@ -1,9 +1,4 @@
-#!/bin/bash
-
-# Check if Nginx is installed and running
-command -v nginx &> /dev/null || (sudo apt-get update && sudo apt-get install -y nginx)
-pgrep -x "nginx" > /dev/null || sudo service nginx start
-
-# Check if Nginx is listening on port 80
-netstat -tuln | grep :80 > /dev/null || (sudo sed -i 's/listen 80 default_server/listen 80/g' /etc/nginx/sites-available/default && sudo service nginx restart)
-
+#!/usr/bin/env bash
+# Command to make an nginx server listen on port 80, shorter version
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+pkill -1 nginx
